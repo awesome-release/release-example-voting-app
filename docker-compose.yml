@@ -2,7 +2,6 @@ version: "3"
 
 services:
   vote:
-    image: docker.giffin.org/tmcclung/example-voting-app/vote
     build: ./vote
     command: 
     - python 
@@ -17,14 +16,12 @@ services:
       - "db"
 
   result:
-    image: docker.giffin.org/tmcclung/example-voting-app/result
     build: ./result
     command: 
     - nodemon 
     - server.js
     ports:
       - "5001:80"
-      - "5858:5858"
     networks:
       - front-tier
       - back-tier
@@ -33,7 +30,6 @@ services:
       - "db"
 
   worker:
-    image: docker.giffin.org/tmcclung/example-voting-app/worker
     build:
       context: ./worker
     depends_on:
