@@ -8,9 +8,6 @@ services:
     - app.py
     ports:
       - "5000:80"
-    networks:
-      - front-tier
-      - back-tier
     depends_on:
       - "redis"
       - "db"
@@ -22,9 +19,6 @@ services:
     - server.js
     ports:
       - "5001:80"
-    networks:
-      - front-tier
-      - back-tier
     depends_on:
       - "redis"
       - "db"
@@ -35,26 +29,9 @@ services:
     depends_on:
       - "redis"
       - "db"
-    networks:
-      - back-tier
 
   redis:
     image: redis:alpine
-    container_name: redis
-    ports: ["6379"]
-    networks:
-      - back-tier
 
   db:
     image: postgres:9.4
-    container_name: db
-    ports: ["5432"]
-    networks:
-      - back-tier
-
-volumes:
-  db-data:
-
-networks:
-  front-tier:
-  back-tier:
