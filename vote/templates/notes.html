@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<div style="display: flex; flex-direction: row;">
+    <div id="notes-app" style="flex-direction: column; margin: 60px; width: 540px; border: 1px solid lightgray;">
+        <div style="flex-direction: row; margin: 8px;">
+            <div>I love notes! <span style="float: right;">Count: <span id="count">0</span></span></div>
+        </div>
+        <input type="text" style="height: 24px; width: 94%; margin: 8px; padding-left: 4px;" />
+        <ol id="notes-items" style="padding-left: 16px;"></ol>
+    </div>
+</div>
+
+
+<script>
+    var handleDelete = function(e) {
+        var parent = e.target.parentElement;
+        parent.parentNode.removeChild(parent);
+
+        var count = document.getElementById('count');
+        var currentCount = parseInt(count.innerText);
+        var nextCount = currentCount - 1;
+        count.innerText = nextCount + '';
+    };
+    document.querySelector('#notes-app > input').addEventListener('keydown', function (e) {
+        if (e.keyCode === 13) {
+            var element = document.querySelector('#notes-app > input');
+            var content = element.value;
+
+            var count = document.getElementById('count');
+            var currentCount = parseInt(count.innerText);
+            var nextCount = currentCount + 1;
+            count.innerText = nextCount + '';
+
+            var items = document.querySelector('#notes-items');
+            items.innerHTML +=
+                '<li style="margin: 8px;"> '+ content +
+                    '<span class="delete" style="float: right; font-size: 16px; color: red; cursor: pointer;">\u2612</span>' +
+                '</li>';
+
+            var deleteButtons = items.querySelectorAll('.delete');
+            for (var i = 0; i < deleteButtons.length; i++) {
+                deleteButtons[i].addEventListener('click', handleDelete);
+            }
+
+            element.value = '';
+        }
+    });
+</script>
+</body>
+</html>
