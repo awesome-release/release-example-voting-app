@@ -12,6 +12,7 @@ RUN pip install -r requirements.txt
 ADD . /app
 
 RUN --mount=type=secret,id=GRAPHQL_PRO_CREDENTIAL cat /run/secrets/GRAPHQL_PRO_CREDENTIAL
+RUN --mount=type=secret,id=TEST_OTHER cat /run/secrets/TEST_OTHER
 
 # Make port 80 available for links and/or publish
 EXPOSE 80
