@@ -1,4 +1,4 @@
-FROM maven:3.5-jdk-8-alpine AS build
+FROM maven:3.9-amazoncorretto-8 AS build
 
 WORKDIR /code
 
@@ -10,7 +10,7 @@ RUN ["mvn", "verify"]
 COPY ["src/main", "/code/src/main"]
 RUN ["mvn", "package"]
 
-FROM openjdk:8-jre-alpine
+FROM amazoncorretto:8-alpine-jre
 
 COPY --from=build /code/target/worker-jar-with-dependencies.jar /
 
