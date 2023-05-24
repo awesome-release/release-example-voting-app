@@ -1,3 +1,4 @@
+# Shared base
 FROM node:18-slim AS base
 
 WORKDIR /app
@@ -16,8 +17,10 @@ EXPOSE 80
 
 CMD ["node", "server.js"]
 
+# Development
 FROM base as dev
 
 RUN npm install -g nodemon
 
+# Production
 FROM base
