@@ -3,9 +3,9 @@ version: "3"
 services:
   vote:
     build: ./vote
-    command: 
-    - python 
-    - app.py
+    command:
+      - python
+      - app.py
     ports:
       - "5000:80"
     depends_on:
@@ -13,10 +13,12 @@ services:
       - "db"
 
   result:
-    build: ./result
-    command: 
-    - nodemon 
-    - server.js
+    build:
+      context: ./result
+      target: dev
+    command:
+      - nodemon
+      - server.js
     ports:
       - "5001:80"
     depends_on:
