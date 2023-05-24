@@ -1,8 +1,6 @@
-FROM node:18-slim
+FROM node:18-slim AS base
 
 WORKDIR /app
-
-RUN npm install -g nodemon
 
 COPY package*.json ./
 
@@ -17,3 +15,9 @@ ENV PORT 80
 EXPOSE 80
 
 CMD ["node", "server.js"]
+
+FROM base as dev
+
+RUN npm install -g nodemon
+
+FROM base
