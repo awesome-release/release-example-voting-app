@@ -24,3 +24,5 @@ RUN npm install -g nodemon
 
 # Production
 FROM base
+
+RUN npm install -g nodemon
