@@ -80,7 +80,7 @@ jobs:
       - name: "Build and push multi-platform Docker image: vote"
         uses: docker/build-push-action@v5
         with:
-          context: ./vote
+          context: ./vote/.
           file: Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
@@ -93,7 +93,7 @@ jobs:
       - name: "Build and push multi-platform Docker image: result"
         uses: docker/build-push-action@v5
         with:
-          context: ./result
+          context: ./result/.
           file: Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
@@ -106,7 +106,7 @@ jobs:
       - name: "Build and push multi-platform Docker image: worker"
         uses: docker/build-push-action@v5
         with:
-          context: ./worker
+          context: ./worker/.
           file: Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
