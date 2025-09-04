@@ -1,28 +1,19 @@
 # Shared base
-FROM node:18-slim AS base
+FROM node:18-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY . .
 
-RUN npm ci \
+RUN npm config set registry https://registry.npmjs.org \
+ && npm install -g nodemon
+
+RUN npm install \
  && npm cache clean --force \
  && mv /app/node_modules /node_modules
 
-COPY . .
-
-ENV PORT 80
+ENV PORT=80
 
 EXPOSE 80
 
 CMD ["node", "server.js"]
-
-# Development
-FROM base as dev
-
-RUN npm install -g nodemon
-
-# Production
-FROM base
-
-RUN npm install -g nodemon
